@@ -4,7 +4,7 @@ namespace frontend\modules\user\controllers;
 
 use Yii;
 use yii\web\Controller;
-use common\models\User;
+use frontend\models\User;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\web\Response;
