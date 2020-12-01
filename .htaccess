@@ -1,0 +1,20 @@
+
+<Directory />
+    Order Deny,Allow
+    Deny from all
+    Options None
+    AllowOverride None
+    Options -Indexes
+</Directory>
+
+<Directory /frontend/web>
+    Options -FollowSymLinks 
+    Order Allow,Deny
+    Allow from all
+</Directory>
+
+<Directory /backend/web>
+    Options -FollowSymLinks
+    Order Allow,Deny
+    Allow from all
+</Directory>
