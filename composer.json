@@ -26,7 +26,8 @@
         "nex/yii2-chosen": "*",
         "himiklab/yii2-recaptcha-widget": "*",
         "kartik-v/yii2-date-range": "dev-master",
-        "promocat/yii2-twofa": "*"
+        "promocat/yii2-twofa": "*",
+        "loveorigami/yii2-modal-ajax": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

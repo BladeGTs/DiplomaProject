@@ -6,7 +6,6 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use frontend\assets\LoginAssets;
-
 LoginAssets::register($this);
 ?>
 <head>
@@ -59,11 +58,9 @@ LoginAssets::register($this);
                                     </div>
 
                                 </div>
-                                    <?=
-                                    $form->field($model, 'reCaptcha')->widget(
+                                    <?=$form->field($model, 'reCaptcha')->widget(
                                             \himiklab\yii2\recaptcha\ReCaptcha::className()
-                                    )
-                                    ?>
+                                    )?>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <?= Html::submitButton('Вход', ['class' => 'btn btn-primary btn-md btn-block waves-effect text-center m-b-20', 'name' => 'login-button']) ?>
@@ -80,3 +77,5 @@ LoginAssets::register($this);
         </div>
     </section>
     </body
+
+        

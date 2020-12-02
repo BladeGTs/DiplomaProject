@@ -2,13 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
 /* @var $this yii\web\View */
 /* @var $model promocat\twofa\models\TwoFaForm */
 /* @var $form ActiveForm */
 ?>
 <div class="login-verification">
-
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->field($model, 'code') ?>   
         <div class="form-group">

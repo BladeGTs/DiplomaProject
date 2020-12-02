@@ -100,7 +100,7 @@ class DefaultController extends Controller
                 $model->login();
                 return $this->goBack();
             }
-            Yii::$app->user->createLoginVerificationSession($user); //Allow the user to verify the login
+            Yii::$app->user->createLoginVerificationSession($user);
             return $this->redirect(['login-verification']);
 
         }
@@ -128,7 +128,7 @@ class DefaultController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-        return $this->render('login-verification', [
+        return $this->renderAjax('login-verification', [
             'model' => $model,
         ]);
     }

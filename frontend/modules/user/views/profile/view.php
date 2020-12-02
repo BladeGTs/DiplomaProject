@@ -10,6 +10,7 @@ use dosamigos\fileupload\FileUpload;
 use yii\widgets\ActiveForm;
 use promocat\twofa\widgets\TwoFaQr;
 $this->title = Html::encode($user->username);
+$this->params['breadcrumbs'][] = Html::encode('Профиль');
 ?>
 
 
@@ -53,8 +54,14 @@ $this->title = Html::encode($user->username);
                                 ]);
                                 ?><br/><br/>
                             <?= Html::a(Yii::t('app', 'Сменить пароль'), ['password-change'], ['class' => 'btn btn-primary']) ?><br/><br/>
+                            <?php if (!$user->hasTwoFaEnabled()): ?>
                             <?= Html::a('Включить двухэтапную аутентификацию', ['/user/profile/enable-two-fa', 'id' => $user->id], ['class' => 'btn btn-primary']) ?>
-                            <?= Html::a('Выключить двухэтапную аутентификацию', ['/user/profile/disable-two-fa', 'id' => $user->id], ['class' => 'btn btn-primary']) ?>
+                            <?php else: ?>
+                            <?= Html::a('Выключить двухэтапную аутентификацию', ['/user/profile/disable-two-fa', 'id' => $user->id], ['class' => 'btn btn-primary','data' => [
+                                        'confirm' => 'Вы уверены что хотите удалить?',
+                                        'method' => 'post',
+                            ],]) ?>
+                            <?php endif; ?>
                            <?php \yii\widgets\Pjax::begin() ?>
                                  <?php
                                 $form = ActiveForm::begin(['id' => 'form-signup', 'options' => ['class' => 'md-float-material'],'fieldConfig' => [ 'template' => "{input}\n{error}", 'options' => [ 'class' => 'text-inverse', ], ],]);?>
@@ -70,15 +77,8 @@ $this->title = Html::encode($user->username);
                             <div class="alert alert-success display-none" id="profile-image-success" style = "display: none">Изображение профиля изменено</div>
                             <div class="alert alert-danger display-none" id="profile-image-fail" style = "display: none"></div>
                         </div>
-
-
                     </article>
-
-   
-
-
                 </div>
-
             </div>
         </div>
 

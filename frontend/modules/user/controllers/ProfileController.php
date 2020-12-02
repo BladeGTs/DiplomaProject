@@ -25,8 +25,8 @@ class ProfileController extends Controller {
         }
 
         if ($user->hasTwoFaEnabled()) {
-            Yii::$app->session->setFlash('error', 'Two-Factor authentication is already enabled.');
-            return $this->redirect(['view', 'id' => $user->id]);
+            Yii::$app->session->setFlash('error', 'Авторизация уже включена.');
+            return $this->redirect(['view', 'nickname' => $user->nickname]);
         }
 
         $model->setUser($user);
@@ -54,6 +54,7 @@ class ProfileController extends Controller {
             Yii::$app->session->setFlash('error', 'Two-Factor authentication is not enabled.');
         } else {
             $user->disableTwoFa();
+            Yii::$app->session->setFlash('success', 'Авторизация успешно отключена.');
         }
         return $this->redirect(['view', 'nickname' => $user->nickname]);
     }

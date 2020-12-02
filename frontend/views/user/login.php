@@ -141,7 +141,6 @@ body{background:url(/images/bg/bg-6.png)}
  }
 }
 </style>
-
 <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
