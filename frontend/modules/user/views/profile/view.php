@@ -54,6 +54,7 @@ $this->title = Html::encode($user->username);
                                 ?><br/><br/>
                             <?= Html::a(Yii::t('app', 'Сменить пароль'), ['password-change'], ['class' => 'btn btn-primary']) ?><br/><br/>
                             <?= Html::a('Включить двухэтапную аутентификацию', ['/user/profile/enable-two-fa', 'id' => $user->id], ['class' => 'btn btn-primary']) ?>
+                            <?= Html::a('Выключить двухэтапную аутентификацию', ['/user/profile/disable-two-fa', 'id' => $user->id], ['class' => 'btn btn-primary']) ?>
                            <?php \yii\widgets\Pjax::begin() ?>
                                  <?php
                                 $form = ActiveForm::begin(['id' => 'form-signup', 'options' => ['class' => 'md-float-material'],'fieldConfig' => [ 'template' => "{input}\n{error}", 'options' => [ 'class' => 'text-inverse', ], ],]);?>

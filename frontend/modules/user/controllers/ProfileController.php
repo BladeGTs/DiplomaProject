@@ -25,15 +25,15 @@ class ProfileController extends Controller {
         }
 
         if ($user->hasTwoFaEnabled()) {
-            Yii::$app->session->setFlash('error', Yii::t('twofa', 'Two-Factor authentication is already enabled.'));
+            Yii::$app->session->setFlash('error', 'Two-Factor authentication is already enabled.');
             return $this->redirect(['view', 'id' => $user->id]);
         }
 
         $model->setUser($user);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $user->id]);
+            return $this->redirect(['view', 'nickname' => $user->nickname]);
         }
-        return $this->render('enable-two-fa', [
+        return $this->render('EnableTwoFa', [
             'model' => $model,
         ]);
     }
@@ -51,11 +51,11 @@ class ProfileController extends Controller {
             throw new ForbiddenHttpException('You are not allowed to update this user.');
         }
         if (!$user->hasTwoFaEnabled()) {
-            Yii::$app->session->setFlash('error', Yii::t('twofa', 'Two-Factor authentication is not enabled.'));
+            Yii::$app->session->setFlash('error', 'Two-Factor authentication is not enabled.');
         } else {
             $user->disableTwoFa();
         }
-        return $this->redirect(['view', 'id' => $user->id]);
+        return $this->redirect(['view', 'nickname' => $user->nickname]);
     }
     
     public function actionView($nickname) {

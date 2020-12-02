@@ -13,6 +13,7 @@ use frontend\modules\user\models\PasswordResetRequestForm;
 use frontend\modules\user\models\ResetPasswordForm;
 use frontend\modules\user\models\SignupForm;
 use frontend\modules\user\components\AuthHandler;
+use promocat\twofa\models\TwoFaForm;
 
 /**
  * Default controller for the `user` module
