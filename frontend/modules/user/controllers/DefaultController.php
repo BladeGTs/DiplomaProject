@@ -13,6 +13,7 @@ use frontend\modules\user\models\PasswordResetRequestForm;
 use frontend\modules\user\models\ResetPasswordForm;
 use frontend\modules\user\models\SignupForm;
 use frontend\modules\user\components\AuthHandler;
+use promocat\twofa\models\TwoFaForm;
 
 /**
  * Default controller for the `user` module
@@ -99,7 +100,7 @@ class DefaultController extends Controller
                 $model->login();
                 return $this->goBack();
             }
-            Yii::$app->user->createLoginVerificationSession($user); //Allow the user to verify the login
+            Yii::$app->user->createLoginVerificationSession($user);
             return $this->redirect(['login-verification']);
 
         }
@@ -127,7 +128,7 @@ class DefaultController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-        return $this->render('login-verification', [
+        return $this->renderAjax('login-verification', [
             'model' => $model,
         ]);
     }
