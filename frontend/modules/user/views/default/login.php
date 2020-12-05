@@ -59,7 +59,7 @@ LoginAssets::register($this);
 
                                 </div>
                                     <?=$form->field($model, 'reCaptcha')->widget(
-                                            \himiklab\yii2\recaptcha\ReCaptcha::className()
+                                            \himiklab\yii2\recaptcha\ReCaptcha::class
                                     )?>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
