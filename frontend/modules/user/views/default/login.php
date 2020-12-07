@@ -76,6 +76,6 @@ LoginAssets::register($this);
             </div>
         </div>
     </section>
-    </body
+    </body>
 
         
