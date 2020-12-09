@@ -17,7 +17,7 @@ $this->title = $statusCode;
 
                     Упс, что-то пошло не так.
 
-                    <div class="copyright">© 2019 «<a href="/"  title="Главная">OptimSKLAD</a>».</div>
+                    <div class="copyright">© <?= date('Y');?> «<a href="/"  title="Главная">OptimSKLAD</a>».</div>
 
                     <a href="/" title="Перейти на главную" class="home">Перейти на главную</a>
 
