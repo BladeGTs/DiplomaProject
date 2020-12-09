@@ -24,10 +24,10 @@ class SiteController extends Controller {
      */
     public function actions() {
         return [
-            'error' => [
-//                'class' => 'yii\web\ErrorAction',
-//                'view' => '@app/views/site/custom-error-view.php'
-            ],
+//            'error' => [
+////                'class' => 'yii\web\ErrorAction',
+////                'view' => '@app/views/site/custom-error-view.php'
+//            ],
         ];
     }
 

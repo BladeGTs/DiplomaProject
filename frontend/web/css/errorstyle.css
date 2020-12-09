@@ -1,0 +1,107 @@
+/** Copyright (c) 2018 Artem Malcov | https://www.pandoge.com/shablony/avtorskiy-shablon-stranicy-oshibki-404 **/
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing:border-box;
+}
+
+*:before, *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	background: #2d0f41;
+	background: radial-gradient(circle at top, #3d1459 0%, #3d1459 15%, #3a1354 15%, #3a1354 25%, #35114d 25%, #35114d 35%, #301046 35%, #301046 45%, #2d0f41 45%, #2d0f41 55%, #2b0e3e 55%, #2b0e3e 100%);
+	height: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.header {
+	text-align: center;
+	color: #fff;
+	font-size: 28px;
+	padding: 90px 0 0 0;
+	font-weight: 200;
+	text-shadow: 0 -2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.header span {
+	font-weight: 600;
+}
+
+.body {
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 0 0 100px 0;
+}
+
+.noise {
+	background: url("/img/bg.png");
+	min-height: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+}
+
+.copyright {
+	padding: 15px 0 45px 0;
+}
+
+.copyright a {
+	text-decoration: none;
+	border-bottom: 1px dashed;
+	color: #d81b60;
+}
+
+.copyright a:hover {
+	text-decoration: none;
+	border: 0;
+}
+
+.home {
+	background: #d81b60;
+	text-decoration: none;
+	color: #fff;
+	border-bottom: 2px solid #ad1457;
+	height: 38px;
+	display: block;
+	width: 220px;
+	line-height: 36px;
+	border-radius: 4px;
+	margin: 0 auto;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 15px;
+	box-shadow: 0 6px 6px rgba(0, 0, 0, .2);
+	text-shadow: 0 2px 1px rgba(0, 0, 0, .1);
+}
+
+.home:hover {
+	background: #c2185b;
+}
+
+.while_grad {
+	background: linear-gradient(to bottom, rgba(255, 255, 255, .1) 0%, rgba(0, 0, 0, 0) 80%);
+	min-height: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+}
+
+.error_icon {
+	display: block;
+	margin: 62px auto 65px auto;
+}
