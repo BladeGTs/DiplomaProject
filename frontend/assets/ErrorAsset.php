@@ -17,7 +17,7 @@ class ErrorAsset extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/errorstyle',
+        'css/errorstyle.css',
     ];
     //put your code here
 }
