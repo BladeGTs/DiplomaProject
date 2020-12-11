@@ -25,7 +25,7 @@ class ProfileController extends Controller {
         }
 
         if ($user->hasTwoFaEnabled()) {
-            Yii::$app->session->setFlash('error', 'Авторизация уже включена.');
+            Yii::$app->session->setFlash('error', Yii::t('yii2-twofa', 'Two-Factor authentication is already enabled.'));
             return $this->redirect(['view', 'nickname' => $user->nickname]);
         }
 
@@ -51,10 +51,10 @@ class ProfileController extends Controller {
             throw new ForbiddenHttpException('You are not allowed to update this user.');
         }
         if (!$user->hasTwoFaEnabled()) {
-            Yii::$app->session->setFlash('error', 'Two-Factor authentication is not enabled.');
+            Yii::$app->session->setFlash('error', Yii::t('yii2-twofa', 'Two-Factor authentication is not enabled.'));
         } else {
             $user->disableTwoFa();
-            Yii::$app->session->setFlash('success', 'Авторизация успешно отключена.');
+            Yii::$app->session->setFlash('success', Yii::t('yii2-twofa','Authentication has been disabled successfully.'));
         }
         return $this->redirect(['view', 'nickname' => $user->nickname]);
     }
