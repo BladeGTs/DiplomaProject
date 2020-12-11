@@ -10,7 +10,8 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language' => 'ru',
+   // 'language' => 'en-US',
+    'language' => 'ru-RU',
     'controllerNamespace' => 'frontend\controllers',
     'modules' => [
         'user' => [
@@ -85,6 +86,13 @@ return [
 
         'stringHelper' => [
             'class' =>'frontend\components\StringHelper',
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource'
+                ],
+            ],
         ],
  
         
