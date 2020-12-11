@@ -31,6 +31,7 @@ class ProfileController extends Controller {
 
         $model->setUser($user);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('yii2-twofa', 'Two-factor authentication enabled successfully.'));
             return $this->redirect(['view', 'nickname' => $user->nickname]);
         }
         return $this->render('EnableTwoFa', [
