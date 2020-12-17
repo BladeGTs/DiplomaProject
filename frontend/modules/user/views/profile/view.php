@@ -5,17 +5,13 @@
 
 /* @var $modelPicture frontend\modules\user\models\forms\PictureForm */
 
-use yii\helpers\Url;
 use yii\helpers\Html;
 use dosamigos\fileupload\FileUpload;
 use yii\widgets\ActiveForm;
-use promocat\twofa\widgets\TwoFaQr;
 
 $this->title = Html::encode($user->username);
 $this->params['breadcrumbs'][] = Html::encode('Профиль');
 ?>
-
-
 <div class="page-posts no-padding">
     <div class="row">
         <div class="page page-post col-sm-12 col-xs-12 post-82">
@@ -62,17 +58,19 @@ $this->params['breadcrumbs'][] = Html::encode('Профиль');
                                 <?php endif; ?>
                                 <br/><br/>
                                 <?php \yii\widgets\Pjax::begin() ?>
-                                <?php
-                                $form = ActiveForm::begin(['id' => 'form-signup', 'options' => ['class' => 'md-float-material'], 'fieldConfig' => ['template' => "{input}\n{error}", 'options' => ['class' => 'text-inverse',],],]); ?>
+                                <?php $form = ActiveForm::begin(['id' => 'form-signup',
+                                    'options' => ['class' => 'md-float-material'],
+                                    'fieldConfig' => ['template' => "{input}\n{error}",
+                                        'options' => ['class' => 'text-inverse',],],]); ?>
                                 <?= $form->field($profile, 'email')->textInput(['maxlength' => true]) ?>
                                 <?= $form->field($profile, 'nickname')->textInput(['maxlength' => true]) ?>
-                                <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary btn-md btn-block waves-effect text-center m-b-20"', 'name' => 'signup-button']) ?>
+                                <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary btn-md btn-block waves-effect text-center m-b-20"',
+                                    'name' => 'signup-button']) ?>
                                 <?php ActiveForm::end(); ?>
                             <?php endif; ?>
                             <?php \yii\widgets\Pjax::end() ?>
                             <br/>
                             <br/>
-
                             <div class="alert alert-success display-none" id="profile-image-success"
                                  style="display: none">Изображение профиля изменено
                             </div>
