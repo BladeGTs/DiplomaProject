@@ -56,9 +56,9 @@ AppAsset::register($this);
 
             <?php
             if (Yii::$app->user->identity) {
-                $menuPrifileItems = [
-                    ['label' => 'Профиль', 'url' => ['user/profile/view', 'nickname' => Yii::$app->user->identity->nickname]],
-                    ['label' => 'Выход', 'url' => ['/user/default/logout']],
+                $menuProfileItems = [
+                    ['label' => 'Профиль', 'url' => ['/user/profile/view', 'nickname' => Yii::$app->user->identity->nickname], 'template' => '<li><a href="{url}"><i class ="ti-user"></i>{label}</a></li>'],
+                    ['label' => 'Выход', 'url' => ['/user/default/logout'], 'template' => '<li><a href="{url}"><i class ="ti-layout-sidebar-left"></i>{label}</a></li>'],
                 ];
             }
             ?>
@@ -93,17 +93,19 @@ AppAsset::register($this);
                                     if (!Yii::$app->user->identity) {
                                         echo 'Гость';
                                     } else {
-
                                         echo Yii::$app->user->identity->username;
-
+                                        $menuItems3 = [
+                                            ['label' => 'Профиль', 'url' => ['/user/profile/view', 'nickname' => Yii::$app->user->identity->nickname], 'template' => '<li><a href="{url}"><i class ="ti-user"></i>{label}</a></li>'],
+                                            ['label' => 'Выход', 'url' => ['/user/default/logout'], 'template' => '<li><a href="{url}"><i class ="ti-layout-sidebar-left"></i>{label}</a></li>'],
+                                        ];
                                         echo ' </span>
                                 <i class="fa fa-chevron-down ti-angle-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="show-notification profile-notification">
-                                <li><a href="#"><i class="ti-user"></i>Профиль</a></li>
-                                <li><a href="/user/default/logout"><i class="ti-layout-sidebar-left"></i>Выход</a></li>
-
-                            </ul>';
+                            </a>';
+                                        echo Menu::widget([
+                                            'options'=>['class'=>'show-notification profile-notification'],
+                                            'encodeLabels' => false,
+                                            'items' => $menuProfileItems,
+                                        ]);
                                     }
                                     ?>
                 </li>
@@ -213,7 +215,6 @@ AppAsset::register($this);
 </div>
 <?php $this->endBody() ?>
 <script>
-
     if ($(".item").hasClass("has-class")) {
         $("li.item").parent().parent('li.nav-item').addClass("has-class");
     }
