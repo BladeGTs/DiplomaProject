@@ -58,7 +58,7 @@ LoginAssets::register($this);
                                     </div>
 
                                 </div>
-                                    <?=$form->field($model, 'reCaptcha',['template'=>'{input}'])->widget(
+                                    <?=$form->field($model, 'reCaptcha')->widget(
                                             \himiklab\yii2\recaptcha\ReCaptcha::class
                                     )?>
                                 <div class="row m-t-30">
