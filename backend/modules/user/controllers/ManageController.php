@@ -16,12 +16,14 @@ use yii\filters\AccessControl;
 /**
  * ManageController implements the CRUD actions for User model.
  */
-class ManageController extends Controller {
+class ManageController extends Controller
+{
 
     /**
      * {@inheritdoc}
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -39,7 +41,7 @@ class ManageController extends Controller {
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['delete', 'update', 'create', 'password-change'],
+                        'actions' => ['delete', 'update', 'create', 'password-change','disable-two-fa'],
                         'roles' => ['admin'],
                     ]],
                 'denyCallback' => function ($rule, $action) {
@@ -54,7 +56,8 @@ class ManageController extends Controller {
      * Lists all User models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $searchModel = new \backend\models\UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 //        $dataProvider = new ActiveDataProvider([
@@ -62,12 +65,13 @@ class ManageController extends Controller {
 //        ]);
 
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
-    public function actionPasswordChange($id) {
+    public function actionPasswordChange($id)
+    {
         $user = $this->findModel($id);
         $model = new PasswordChangeForm($user);
 
@@ -77,8 +81,8 @@ class ManageController extends Controller {
         } else {
 
             return $this->render('passwordChange', [
-                        'model' => $model,
-                        'user' => $user,
+                'model' => $model,
+                'user' => $user,
             ]);
         }
     }
@@ -89,11 +93,26 @@ class ManageController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id) {
-
+    public function actionView($id)
+    {
         return $this->render('view', [
-                    'model' => $this->findModel($id),
+            'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionDisableTwoFa($id)
+    {
+        $user = $this->findModel($id);
+//        if (!$user->hasTwoFaEnabled()) {
+//            Yii::$app->session->setFlash('error', Yii::t('yii2-twofa', 'Two-Factor authentication is not enabled.'));
+//        } else
+// {
+            $user->disableTwoFa();
+            Yii::$app->session->setFlash('success', Yii::t('yii2-twofa', 'Authentication has been disabled successfully.'));
+//        }
+        if (!Yii::$app->request->isAjax) {
+            return $this->redirect(['index']);
+        }
     }
 
     /**
@@ -113,15 +132,16 @@ class ManageController extends Controller {
 //            'model' => $model,
 //        ]);
 //    }
-    public function actionCreate() {
-
+    public function actionCreate()
+    {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', "Пользователь добавлен");
             return $this->redirect('index');
         }
+
         return $this->render('create', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 
@@ -143,7 +163,8 @@ class ManageController extends Controller {
 //            'model' => $model,
 //        ]);
 //    }
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $user = $this->findModel($id);
         $model = new ProfileUpdateForm($user);
 
@@ -153,16 +174,17 @@ class ManageController extends Controller {
         } else {
 
             return $this->render('update2', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }
 
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
 //        $this->findModel($id)->delete();
 //        return $this->redirect('index');
         $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('success','Удалено');
+        Yii::$app->session->setFlash('success', 'Удалено');
         if (!Yii::$app->request->isAjax) {
             return $this->redirect(['index']);
         }
@@ -175,7 +197,8 @@ class ManageController extends Controller {
      * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) {
+    protected function findModel($id)
+    {
         if (($model = User::findOne($id)) !== null) {
             return $model;
         }

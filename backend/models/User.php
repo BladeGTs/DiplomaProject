@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\models;
 
 use Yii;
@@ -32,9 +33,9 @@ class User extends ActiveRecord implements IdentityInterface
 
     const ROLE_ADMIN = 'admin';
     const ROLE_MODERATOR = 'moderator';
-    
+
     public $roles;
-    
+
     /**
      * @inheritdoc
      */
@@ -50,9 +51,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             TimestampBehavior::className(),
+            \promocat\twofa\behaviors\TwoFaBehavior::className()
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -64,20 +66,21 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
-    
-    public function attributeLabels() {
+
+    public function attributeLabels()
+    {
         return [
-            'id'=>'Идентификатор',
-            'picture'=>'Изображение',
-            'Username'=>'Username',
-            'created_at'=>'Создано',
-            'updated_at'=>'Изменено',
-            'nickname'=>'Nickname',
-            'roles'=>'Роли',
-            'status'=>'Статус',
+            'id' => 'Идентификатор',
+            'picture' => 'Изображение',
+            'Username' => 'Username',
+            'created_at' => 'Создано',
+            'updated_at' => 'Изменено',
+            'nickname' => 'Nickname',
+            'roles' => 'Роли',
+            'status' => 'Статус',
         ];
     }
-    
+
     public function __construct()
     {
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'saveRoles']);
@@ -89,9 +92,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function saveRoles()
     {
-        
-        Yii::$app->authManager->revokeAll($this->getId()); 
-        
+        Yii::$app->authManager->revokeAll($this->getId());
         if (is_array($this->roles)) {
             foreach ($this->roles as $roleName) {
                 if ($role = Yii::$app->authManager->getRole($roleName)) {
@@ -100,9 +101,9 @@ class User extends ActiveRecord implements IdentityInterface
             }
         }
     }
-    
+
     /**
-     * Populate roles attribute with data from RBAC after record loaded from DB 
+     * Populate roles attribute with data from RBAC after record loaded from DB
      */
     public function afterFind()
     {
@@ -176,7 +177,7 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
@@ -249,7 +250,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
-    
+
     /**
      * @return string
      */
@@ -270,13 +271,14 @@ class User extends ActiveRecord implements IdentityInterface
             self::ROLE_MODERATOR => 'Moderator',
         ];
     }
-    
+
     public function getRole()
     {
-        return $this->hasMany(AuthItem::class, ['name'=>'item_name'])->viaTable('auth_assignment', ['user_id'=>'id']);
+        return $this->hasMany(AuthItem::class, ['name' => 'item_name'])->viaTable('auth_assignment', ['user_id' => 'id']);
     }
-    
-    public function getNickname() {
+
+    public function getNickname()
+    {
         return ($this->nickname) ? $this->nickname : $this->getId();
     }
 }

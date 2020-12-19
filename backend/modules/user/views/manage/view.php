@@ -24,15 +24,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Удалить двухфакторную аутентификцию', ['disable-two-fa', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Вы уверены что хотите удалить аутентификацию?',
+                'method' => 'post',
+            ],
+
+        ]) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-                        ['attribute' => 'picture',
+            ['attribute' => 'picture',
                 'format' => 'raw',
-                'value' => function($user) {
+                'value' => function ($user) {
                     return Html::img($user->getImage(), ['width' => '120px']);
                 }
             ],
@@ -44,12 +52,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //'about:ntext',
             //'type',
             'nickname',
-                                [
-                'attribute'=>'roles',
-                'value'=> function($user){
-                return implode(', ', $user->getRoles());
+            [
+                'attribute' => 'roles',
+                'value' => function ($user) {
+                    return implode(', ', $user->getRoles());
                 }
-                ],
+            ],
         ],
     ]) ?>
 

@@ -14,7 +14,6 @@ return [
     'bootstrap' => ['log'],
         'language' => 'ru',
     'modules' => [
-        
         'debug' => [
             'class' => 'yii\debug\Module',
             'allowedIPs' => ['*']
@@ -52,13 +51,24 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
+            'class' => promocat\twofa\User::class,
             'identityClass' => 'backend\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
+        'twoFa' => [
+            'class' => promocat\twofa\TwoFa::class
+        ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource'
+                ],
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

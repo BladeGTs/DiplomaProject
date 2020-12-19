@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use Yii;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use dosamigos\datepicker\DatePicker;
@@ -26,8 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(['id' => 'pjax-container']); ?>
     <?= Alert::widget() ?>
     
-    <?=
-    GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -68,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'header'=>'Функционал',
                 'options'=>['margin-left'=>'30px',],
-                'template' => '{view} {update} {delete}',
+                'template' => '{view} {update} {delete} {disable-two-fa}',
                 'headerOptions' => ['width' => '80'],
                 'buttons' => [
                     'delete' => function ($url) {
@@ -89,6 +87,24 @@ $this->params['breadcrumbs'][] = $this->title;
                             ",
                         ]);
                     },
+                    'disable-two-fa'=> function($url){
+                        $iconName = "trash";
+                        $icon = Html::tag('span', '', ['class' => "glyphicon glyphicon-$iconName"]);
+                        return Html::a($icon, '#', [
+                            'title' => Yii::t('yii', 'Delete'),
+                            'aria-label' => Yii::t('yii', 'Delete'),
+                            'onclick' => "
+                                if (confirm('Вы действительно хотите убрать у пользователя?')) {
+                                    $.ajax('$url', {
+                                        type: 'POST'
+                                    }).done(function(data) {
+                                        $.pjax.reload({container: '#pjax-container'});
+                                    });
+                                }
+                                return false;
+                            ",
+                        ]);
+                    }
                 ],
             ],
         ],

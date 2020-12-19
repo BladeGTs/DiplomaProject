@@ -13,10 +13,12 @@ use app\modules\user\models\PasswordChangeForm;
 use frontend\modules\user\models\ProfileUpdateForm;
 use promocat\twofa\models\TwoFaForm;
 
-class ProfileController extends Controller {
+class ProfileController extends Controller
+{
 
-    
-    public function actionEnableTwoFa($id) {
+
+    public function actionEnableTwoFa($id)
+    {
         $model = new TwoFaForm();
         $user = $this->findModel($id);
 
@@ -38,15 +40,16 @@ class ProfileController extends Controller {
             'model' => $model,
         ]);
     }
-    
-            /**
+
+    /**
      * Enables Two Factor Authentication an existing User model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException
      * @throws \yii\base\Exception
      */
-    public function actionDisableTwoFa($id) {
+    public function actionDisableTwoFa($id)
+    {
         $user = $this->findModel($id);
         if ($user->id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to update this user.');
@@ -55,12 +58,13 @@ class ProfileController extends Controller {
             Yii::$app->session->setFlash('error', Yii::t('yii2-twofa', 'Two-Factor authentication is not enabled.'));
         } else {
             $user->disableTwoFa();
-            Yii::$app->session->setFlash('success', Yii::t('yii2-twofa','Authentication has been disabled successfully.'));
+            Yii::$app->session->setFlash('success', Yii::t('yii2-twofa', 'Authentication has been disabled successfully.'));
         }
         return $this->redirect(['view', 'nickname' => $user->nickname]);
     }
-    
-    public function actionView($nickname) {
+
+    public function actionView($nickname)
+    {
 
         /* @var $currentUser User */
         $user = $this->findModel();
@@ -72,18 +76,20 @@ class ProfileController extends Controller {
             return $this->redirect(['index']);
         } else {
             return $this->render('view', [
-                        'user' => $this->findUser($nickname),
-                        'currentUser' => $currentUser,
-                        'modelPicture' => $modelPicture,
-                        'profile' => $profile,
+                'user' => $this->findUser($nickname),
+                'currentUser' => $currentUser,
+                'modelPicture' => $modelPicture,
+                'profile' => $profile,
             ]);
         }
     }
+
     /**
      * Action for change password
      * @return type
      */
-    public function actionPasswordChange() {
+    public function actionPasswordChange()
+    {
         $user = $this->findModel();
         $model = new PasswordChangeForm($user);
 
@@ -91,19 +97,21 @@ class ProfileController extends Controller {
             return $this->redirect(['index']);
         } else {
             return $this->render('passwordChange', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }
 
-    private function findModel() {
+    private function findModel()
+    {
         return User::findOne(Yii::$app->user->identity->getId());
     }
 
     /**
      * Handle profile image upload via ajax request
      */
-    public function actionUploadPicture() {
+    public function actionUploadPicture()
+    {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         $model = new PictureForm();
@@ -129,7 +137,8 @@ class ProfileController extends Controller {
      * @return User
      * @throws NotFoundHttpException
      */
-    private function findUser($nickname) {
+    private function findUser($nickname)
+    {
         if ($user = User::find()->where(['nickname' => $nickname])->orWhere(['id' => $nickname])->one()) {
             return $user;
         }
@@ -141,7 +150,8 @@ class ProfileController extends Controller {
      * @return User
      * @throws NotFoundHttpException
      */
-    private function findUserById($id) {
+    private function findUserById($id)
+    {
         if ($user = User::findOne($id)) {
             return $user;
         }
