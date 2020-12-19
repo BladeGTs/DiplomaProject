@@ -50,8 +50,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
-            \promocat\twofa\behaviors\TwoFaBehavior::className()
+            TimestampBehavior::class,
+            \promocat\twofa\behaviors\TwoFaBehavior::class
         ];
     }
 
