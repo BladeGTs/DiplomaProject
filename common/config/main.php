@@ -10,6 +10,11 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
+        'response' => [
+            'on beforeSend' => function($event) {
+                $event->sender->headers->add('X-Frame-Options', 'DENY');
+            },
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
