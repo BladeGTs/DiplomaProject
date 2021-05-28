@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Change directory
         run: cd ../../
+      - name: Show directory
+        run: echo $(pwd)
         
       - name: Git Pull
         run: |
