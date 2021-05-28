@@ -20,9 +20,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Change directory
-        run: cd /var/www/y/
-        
+      
       - name: Git Pull
         run: |
           echo Run git pulling
