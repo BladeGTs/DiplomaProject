@@ -26,7 +26,7 @@ jobs:
         with:
             switches: -avzr --delete
             path: ./
-            remote_path: /var/www/y/
+            remote_path: /var/www/test_actions/
             remote_host: test-blade.ml
             remote_port: 37890
             remote_user: muser
