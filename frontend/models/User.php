@@ -31,7 +31,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
 
     const DEFAULT_IMAGE = '/img/user.png';
-    
+
 
 
     /**
@@ -194,7 +194,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
-    
+
     /**
      * @return mixed
      */
@@ -202,7 +202,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return ($this->nickname) ? $this->nickname : $this->getId();
     }
-  
+
 
     /**
      * @param \frontend\models\User $user
@@ -220,7 +220,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return self::DEFAULT_IMAGE;
     }
-    
-    
-    
+
+
+
 }
