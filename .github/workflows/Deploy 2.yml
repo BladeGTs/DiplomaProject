@@ -41,7 +41,7 @@ jobs:
         run: php init --env=Production --overwrite=All
         
       - name: Send directory to server
-      - uses: burnett01/rsync-deployments@4.1
+        uses: burnett01/rsync-deployments@4.1
         with:
             switches: -avzr
             path: ./
