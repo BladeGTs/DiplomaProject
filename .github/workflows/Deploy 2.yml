@@ -47,7 +47,7 @@ jobs:
       - name: Send directory to server
         uses: burnett01/rsync-deployments@4.1
         with:
-            switches: -avzr
+            switches: -avzr --delete
             path: ./
             remote_path: /var/www/y
             remote_host: test-blade.ml
