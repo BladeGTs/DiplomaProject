@@ -61,5 +61,5 @@ jobs:
           host: test-blade.ml
           username: muser
           port: 37890
-          key: ${{secrets.KEY_SSH}}
+          password: ${{secrets.PASSWORD}}
           script: cp /home/muser/configfiles/main-local.php /var/www/y/common/config/
