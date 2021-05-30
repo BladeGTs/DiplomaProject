@@ -43,11 +43,11 @@ jobs:
       - name: Send directory to server
         uses: burnett01/rsync-deployments@4.1
         with:
-            rsh: cp ~/configfiles/main-local.php /var/www/y/common/config/
             switches: -avzr
             path: ./
-            remote_path: /var/www/y/
+            remote_path: /var/www/y
             remote_host: test-blade.ml
             remote_port: 37890
             remote_user: muser
             remote_key: ${{secrets.KEY}}
+            rsh: cp ~/configfiles/main-local.php /var/www/y/common/config/
