@@ -50,4 +50,4 @@ jobs:
             remote_port: 37890
             remote_user: muser
             remote_key: ${{secrets.KEY}}
-            rsh: -l muser test-blade.ml cp ~/configfiles/main-local.php /var/www/y/common/config/
+            rsh: -l muser test-blade.ml cp /home/muser/configfiles/main-local.php /var/www/y/common/config/
