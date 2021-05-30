@@ -51,5 +51,11 @@ jobs:
             remote_user: muser
             remote_key: ${{secrets.KEY}}
             
-      - name: Shel command
-        run: ssh -p 37890 muser@test-blade.ml 'cp /home/muser/configfiles/main-local.php /var/www/y/common/config/'
+      - name: executing remote ssh commands using KEY
+        uses: appleboy/ssh-action@master
+        with:
+          host: test-blade.ml
+          username: muser
+          port: 37890
+          key: ${{secrets.KEY_SSH}}
+          script: cp /home/muser/configfiles/main-local.php /var/www/y/common/config/
