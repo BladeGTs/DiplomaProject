@@ -22,9 +22,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      - name: Chane ssh keys to 600
-        run: chmod 600 ${{secrets.KEY_SSH}}
         
       - name: Setup PHP with PECL extension
         uses: shivammathur/setup-php@v2
