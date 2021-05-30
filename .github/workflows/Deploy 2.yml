@@ -52,4 +52,4 @@ jobs:
             remote_key: ${{secrets.KEY}}
             
       - name: Shel command
-        run: ssh muser:test-blade.ml 'cp /home/muser/configfiles/main-local.php /var/www/y/common/config/'
+        run: ssh muser@test-blade.ml 'cp /home/muser/configfiles/main-local.php /var/www/y/common/config/'
