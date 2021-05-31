@@ -73,7 +73,7 @@ class ProfileController extends Controller
         $currentUser = Yii::$app->user->identity;
         $modelPicture = new PictureForm();
         if ($profile->load(Yii::$app->request->post()) && $profile->update()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view','nickname' => $user->nickname]);
         } else {
             return $this->render('view', [
                 'user' => $this->findUser($nickname),

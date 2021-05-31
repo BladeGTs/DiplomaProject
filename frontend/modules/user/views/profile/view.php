@@ -59,12 +59,12 @@ $this->params['breadcrumbs'][] = Html::encode('Профиль');
                                 <br/><br/>
                                 <?php \yii\widgets\Pjax::begin() ?>
                                 <?php $form = ActiveForm::begin(['id' => 'form-signup',
-                                    'options' => ['class' => 'md-float-material'],
+                                    'options' => ['class' => 'md-float-material col-xs-5'],
                                     'fieldConfig' => ['template' => "{input}\n{error}",
                                         'options' => ['class' => 'text-inverse',],],]); ?>
                                 <?= $form->field($profile, 'email')->textInput(['maxlength' => true]) ?>
                                 <?= $form->field($profile, 'nickname')->textInput(['maxlength' => true]) ?>
-                                <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary btn-md btn-block waves-effect text-center m-b-20"',
+                                <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary waves-effect',
                                     'name' => 'signup-button']) ?>
                                 <?php ActiveForm::end(); ?>
                             <?php endif; ?>
