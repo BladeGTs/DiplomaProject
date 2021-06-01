@@ -21,6 +21,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Install SSH KEY
+        run: echo "${{secrets.KEY}}" > ~/.ssh/id_rsa.pub
+        
       - uses: actions/checkout@v2
         
       - name: Setup PHP with PECL extension
@@ -40,7 +43,7 @@ jobs:
         
       - name: Php init
         run: php init --env=Production --overwrite=All
-        
+      
       - name: Send directory to server
         uses: burnett01/rsync-deployments@4.1
         with:
@@ -58,5 +61,5 @@ jobs:
           host: test-blade.ml
           username: muser
           port: 37890
-          password: ${{secrets.PASSWORD}}
+          key: ~/.ssh/id_rsa.pub
           script: cp /home/muser/configfiles/main-local.php /var/www/y/common/config/
