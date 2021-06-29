@@ -58,5 +58,5 @@ jobs:
           host: test-blade.ml
           username: $${{secrets.SERVER_USER}}
           port: ${{secrets.SERVER_PORT}}
-          password: ${{secrets.PASSWORD}}
+          key: ${{ secrets.KEY }}
           script: cp /home/muser/configfiles/main-local.php /var/www/y/common/config/
