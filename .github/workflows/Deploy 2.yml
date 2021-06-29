@@ -50,7 +50,7 @@ jobs:
             remote_host: ${{secrets.SERVER_DOMAIN_NAME}}
             remote_port: ${{secrets.SERVER_PORT}}
             remote_user: $${{secrets.SERVER_USER}}
-            remote_key: ${{secrets.KEY}}
+            remote_key: ${{secrets.KEY_SSH}}
         
       - name: executing remote ssh commands using KEY
         uses: appleboy/ssh-action@master
