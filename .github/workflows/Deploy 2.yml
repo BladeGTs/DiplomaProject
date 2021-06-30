@@ -40,25 +40,22 @@ jobs:
       - name: Php init
         run: php init --env=Production --overwrite=All
         
-  deploy:
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-        - name: Send directory to server
-          uses: burnett01/rsync-deployments@4.1
-          with:
-              switches: -avzr --delete
-              path: ./
-              remote_path: /var/www/y
-              remote_host: ${{secrets.SERVER_DOMAIN_NAME}}
-              remote_port: ${{secrets.SERVER_PORT}}
-              remote_user: ${{secrets.SERVER_USER}}
-              remote_key: ${{secrets.KEY}}
-        - name: copy config
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{secrets.SERVER_DOMAIN_NAME}}
-            username: ${{secrets.SERVER_USER}}
-            port: ${{secrets.SERVER_PORT}}
-            password: ${{secrets.PASSWORD}}
-            script: cp /home/${{secrets.SERVER_USER}}/configfiles/main-local.php /var/www/y/common/config/
+      - name: Send directory to server
+        uses: burnett01/rsync-deployments@4.1
+        with:
+            switches: -avzr --delete
+            path: ./
+            remote_path: /var/www/y
+            remote_host: ${{secrets.SERVER_DOMAIN_NAME}}
+            remote_port: ${{secrets.SERVER_PORT}}
+            remote_user: ${{secrets.SERVER_USER}}
+            remote_key: ${{secrets.KEY}}
+            
+      - name: copy config
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SERVER_DOMAIN_NAME}}
+          username: ${{secrets.SERVER_USER}}
+          port: ${{secrets.SERVER_PORT}}
+          key: ${{secrets.KEY}}
+          script: cp /home/${{secrets.SERVER_USER}}/configfiles/main-local.php /var/www/y/common/config/
