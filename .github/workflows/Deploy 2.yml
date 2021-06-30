@@ -17,7 +17,6 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -41,22 +40,25 @@ jobs:
       - name: Php init
         run: php init --env=Production --overwrite=All
         
-      - name: Send directory to server
-        uses: burnett01/rsync-deployments@4.1
-        with:
-            switches: -avzr --delete
-            path: ./
-            remote_path: /var/www/y
-            remote_host: ${{secrets.SERVER_DOMAIN_NAME}}
-            remote_port: ${{secrets.SERVER_PORT}}
-            remote_user: ${{secrets.SERVER_USER}}
-            remote_key: ${{secrets.KEY}}
-        
-      - name: executing remote ssh commands using KEY
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.SERVER_DOMAIN_NAME}}
-          username: ${{secrets.SERVER_USER}}
-          port: ${{secrets.SERVER_PORT}}
-          password: ${{secrets.PASSWORD}}
-          script: cp /home/${{secrets.SERVER_USER}}/configfiles/main-local.php /var/www/y/common/config/
+  deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Send directory to server
+          uses: burnett01/rsync-deployments@4.1
+          with:
+              switches: -avzr --delete
+              path: ./
+              remote_path: /var/www/y
+              remote_host: ${{secrets.SERVER_DOMAIN_NAME}}
+              remote_port: ${{secrets.SERVER_PORT}}
+              remote_user: ${{secrets.SERVER_USER}}
+              remote_key: ${{secrets.KEY}}
+        - name: copy config
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{secrets.SERVER_DOMAIN_NAME}}
+            username: ${{secrets.SERVER_USER}}
+            port: ${{secrets.SERVER_PORT}}
+            password: ${{secrets.PASSWORD}}
+            script: cp /home/${{secrets.SERVER_USER}}/configfiles/main-local.php /var/www/y/common/config/
