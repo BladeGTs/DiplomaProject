@@ -47,7 +47,7 @@ jobs:
             switches: -avzr --delete
             path: ./
             remote_path: /var/www/y
-            remote_host: test-blade.ml
+            remote_host: ${{secrets.SERVER_DOMAIN_NAME}}
             remote_port: 37890
             remote_user: muser
             remote_key: ${{secrets.KEY}}
