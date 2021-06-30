@@ -49,14 +49,14 @@ jobs:
             remote_path: /var/www/y
             remote_host: ${{secrets.SERVER_DOMAIN_NAME}}
             remote_port: ${{secrets.SERVER_PORT}}
-            remote_user: muser
+            remote_user: ${{secrets.SERVER_USER}}
             remote_key: ${{secrets.KEY}}
         
       - name: executing remote ssh commands using KEY
         uses: appleboy/ssh-action@master
         with:
           host: ${{secrets.SERVER_DOMAIN_NAME}}
-          username: muser
+          username: ${{secrets.SERVER_USER}}
           port: ${{secrets.SERVER_PORT}}
           password: ${{secrets.PASSWORD}}
-          script: cp /home/muser/configfiles/main-local.php /var/www/y/common/config/
+          script: cp /home/${{secrets.SERVER_USER}}/configfiles/main-local.php /var/www/y/common/config/
